@@ -37,7 +37,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define BUFFER_SIZE  480
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -74,8 +74,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	unsigned char xtemp[120];
-	unsigned char ytemp[120];
+	unsigned char xtemp[BUFFER_SIZE];
+	unsigned char ytemp[BUFFER_SIZE];
 	
   /* USER CODE END 1 */
   
@@ -102,7 +102,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-	HAL_UART_Receive_IT(&huart3,xtemp,24);
+	HAL_UART_Receive_IT(&huart3,xtemp,BUFFER_SIZE);
   /* USER CODE END 2 */
  
  
@@ -117,9 +117,9 @@ int main(void)
 		if(1==flag)
 		{
 			flag=0;
-			memcpy(ytemp,xtemp,120);
+			memcpy(ytemp,xtemp,BUFFER_SIZE);
 			HAL_UART_Transmit(&huart1,ytemp,24,200);
-			HAL_UART_Receive_IT(&huart3,xtemp,24);
+			HAL_UART_Receive_IT(&huart3,xtemp,BUFFER_SIZE);
 		}
 		
 		#if 0
