@@ -108,17 +108,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		if(HAL_OK==HAL_UART_Receive(&huart3,xtemp,120,2000))
+		if(HAL_OK==HAL_UART_Receive(&huart3,xtemp,120,600))
 		{
-			//HAL_UART_Transmit(&huart1,"hello\r\n",10,200);
 			memcpy(ytemp,xtemp,120);
 			HAL_UART_Transmit(&huart1,ytemp,24,200);
 		}
 		else
 		{
-			
-			HAL_UART_Transmit(&huart1,"2222",10,2000);
-			
+			HAL_UART_Transmit(&huart1,__TIME__,10,200);
 		}
   }
   /* USER CODE END 3 */
